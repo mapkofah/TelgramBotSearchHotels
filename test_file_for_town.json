@@ -1,0 +1,713 @@
+[
+    {
+        "id": 2651431296,
+        "name": "L 3 Downtown Newark Guesthouse",
+        "starRating": 3.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "379 Littleton Ave",
+            "extendedAddress": "",
+            "locality": "Newark",
+            "postalCode": "07103",
+            "region": "NJ",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 7.2,
+            "rating": "7.2",
+            "total": 8,
+            "scale": 10,
+            "badge": "good",
+            "badgeText": "Good"
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "11 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "11 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$67",
+                "exactCurrent": 66.75,
+                "old": "$75",
+                "fullyBundledPricePerStay": "total $97"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "EC"
+        },
+        "neighbourhood": "Newark",
+        "deals": {
+            "secretPrice": {
+                "dealText": "Save more with Secret Prices"
+            },
+            "priceReasoning": "DRR-445"
+        },
+        "messaging": {
+            "scarcity": "2 left on our app"
+        },
+        "badging": {},
+        "coordinate": {
+            "lat": 40.733866,
+            "lon": -74.198512
+        },
+        "roomsLeft": 2,
+        "providerType": "LOCAL",
+        "supplierHotelId": 82825978,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/83000000/82830000/82826000/82825978/41f0110b_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 453028,
+        "name": "NY Moore Hostel",
+        "starRating": 2.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "179 Moore Street",
+            "extendedAddress": "",
+            "locality": "Brooklyn",
+            "postalCode": "11206",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 8.0,
+            "rating": "8.0",
+            "total": 455,
+            "scale": 10,
+            "badge": "very-good",
+            "badgeText": "Very Good"
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "4.4 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "4.5 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$68",
+                "exactCurrent": 68.0,
+                "fullyBundledPricePerStay": "total $86"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "HC"
+        },
+        "neighbourhood": "East Williamsburg",
+        "deals": {},
+        "messaging": {
+            "scarcity": "1 left on our app"
+        },
+        "badging": {},
+        "coordinate": {
+            "lat": 40.704175,
+            "lon": -73.937509
+        },
+        "roomsLeft": 1,
+        "providerType": "LOCAL",
+        "supplierHotelId": 7803456,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/8000000/7810000/7803500/7803456/9d6e9466_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 513116,
+        "name": "HI New York City",
+        "starRating": 2.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "891 Amsterdam Avenue",
+            "extendedAddress": "",
+            "locality": "New York",
+            "postalCode": "10025",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 8.4,
+            "rating": "8.4",
+            "total": 885,
+            "scale": 10,
+            "badge": "very-good",
+            "badgeText": "Very Good"
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "3.1 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "3.0 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$81",
+                "exactCurrent": 81.0,
+                "old": "$90",
+                "fullyBundledPricePerStay": "total $81"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "HC"
+        },
+        "neighbourhood": "Manhattan Valley",
+        "deals": {
+            "specialDeal": {
+                "dealText": "Mobile exclusive: save 10%"
+            },
+            "priceReasoning": "DRR-444"
+        },
+        "messaging": {
+            "scarcity": "1 left on our app"
+        },
+        "badging": {},
+        "coordinate": {
+            "lat": 40.798712,
+            "lon": -73.96696
+        },
+        "roomsLeft": 1,
+        "providerType": "LOCAL",
+        "supplierHotelId": 10052731,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/11000000/10060000/10052800/10052731/86a2d9af_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 2688323936,
+        "name": "Motel House",
+        "starRating": 2.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "215 Littleton Ave",
+            "extendedAddress": "",
+            "locality": "Newark",
+            "postalCode": "07103",
+            "region": "NJ",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 2.0,
+            "rating": "2.0",
+            "total": 1,
+            "scale": 10
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "11 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "11 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$81",
+                "exactCurrent": 81.22,
+                "old": "$96",
+                "fullyBundledPricePerStay": "total $109"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "EC"
+        },
+        "neighbourhood": "Newark",
+        "deals": {
+            "secretPrice": {
+                "dealText": "Save more with Secret Prices"
+            },
+            "priceReasoning": "DRR-445"
+        },
+        "messaging": {
+            "scarcity": "2 left on our app"
+        },
+        "badging": {},
+        "coordinate": {
+            "lat": 40.73987,
+            "lon": -74.19606
+        },
+        "roomsLeft": 2,
+        "providerType": "LOCAL",
+        "supplierHotelId": 83978873,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/84000000/83980000/83978900/83978873/38184b83_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 200950,
+        "name": "JFK Inn",
+        "starRating": 2.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "154-10 S Conduit Ave",
+            "extendedAddress": "",
+            "locality": "Jamaica",
+            "postalCode": "11434",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 4.6,
+            "rating": "4.6",
+            "total": 1563,
+            "scale": 10
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "12 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "12 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$106",
+                "exactCurrent": 106.04,
+                "old": "$112",
+                "fullyBundledPricePerStay": "total $125"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "EC"
+        },
+        "neighbourhood": "Queens",
+        "deals": {
+            "specialDeal": {
+                "dealText": "Mobile exclusive: save 5%"
+            },
+            "priceReasoning": "DRR-444"
+        },
+        "messaging": {},
+        "badging": {},
+        "pimmsAttributes": "DoubleStamps|MESOTESTUS|D13|TESCO",
+        "coordinate": {
+            "lat": 40.666589,
+            "lon": -73.782211
+        },
+        "providerType": "LOCAL",
+        "supplierHotelId": 534048,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/1000000/540000/534100/534048/fad0977c_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 2159513600,
+        "name": "Hotel Pergola JFK Airport",
+        "starRating": 2.5,
+        "urls": {},
+        "address": {
+            "streetAddress": "183-02  Jamaica ave",
+            "extendedAddress": "",
+            "locality": "Hollis",
+            "postalCode": "11423",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 4.6,
+            "rating": "4.6",
+            "total": 35,
+            "scale": 10
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "11 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "11 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$116",
+                "exactCurrent": 116.1,
+                "old": "$129",
+                "fullyBundledPricePerStay": "total $137"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "EC"
+        },
+        "neighbourhood": "Queens",
+        "deals": {
+            "secretPrice": {
+                "dealText": "Save more with Secret Prices"
+            },
+            "priceReasoning": "DRR-443"
+        },
+        "messaging": {
+            "scarcity": "4 left on our app"
+        },
+        "badging": {},
+        "pimmsAttributes": "D13|HRW",
+        "coordinate": {
+            "lat": 40.708912,
+            "lon": -73.777087
+        },
+        "roomsLeft": 4,
+        "providerType": "LOCAL",
+        "supplierHotelId": 67453550,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/68000000/67460000/67453600/67453550/91142314_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 450874,
+        "name": "Morris Guest House",
+        "starRating": 3.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "Morris Avenue & East Tremont Avenue",
+            "extendedAddress": "",
+            "locality": "Bronx",
+            "postalCode": "10453",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 5.8,
+            "rating": "5.8",
+            "total": 117,
+            "scale": 10
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "7.7 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "7.7 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$118",
+                "exactCurrent": 118.4,
+                "old": "$148",
+                "fullyBundledPricePerStay": "total $163"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "HC"
+        },
+        "neighbourhood": "Tremont",
+        "deals": {
+            "secretPrice": {
+                "dealText": "Save more with Secret Prices"
+            },
+            "priceReasoning": "DRR-445"
+        },
+        "messaging": {
+            "scarcity": "1 left on our app"
+        },
+        "badging": {},
+        "coordinate": {
+            "lat": 40.851363,
+            "lon": -73.907234
+        },
+        "roomsLeft": 1,
+        "providerType": "LOCAL",
+        "supplierHotelId": 7369853,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/8000000/7370000/7369900/7369853/d0713c98_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 485555,
+        "name": "Delz Bed & Breakfast",
+        "starRating": 3.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "8914 Glenwood Road",
+            "extendedAddress": "",
+            "locality": "Brooklyn",
+            "postalCode": "11236",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 6.8,
+            "rating": "6.8",
+            "total": 60,
+            "scale": 10,
+            "badge": "good",
+            "badgeText": "Good"
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "9.0 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "9.0 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$125",
+                "exactCurrent": 125.0,
+                "fullyBundledPricePerStay": "total $279"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "HC"
+        },
+        "neighbourhood": "Canarsie",
+        "deals": {},
+        "messaging": {
+            "scarcity": "1 left on our app"
+        },
+        "badging": {},
+        "coordinate": {
+            "lat": 40.641535,
+            "lon": -73.907977
+        },
+        "roomsLeft": 1,
+        "providerType": "LOCAL",
+        "supplierHotelId": 9671578,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/10000000/9680000/9671600/9671578/7ef3efdb_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 273442,
+        "name": "Rodeway Inn Capri",
+        "starRating": 2.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "1 Valley Road",
+            "extendedAddress": "",
+            "locality": "Little Ferry",
+            "postalCode": "07643",
+            "region": "NJ",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 5.8,
+            "rating": "5.8",
+            "total": 662,
+            "scale": 10
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "7.2 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "7.2 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$129",
+                "exactCurrent": 129.0,
+                "fullyBundledPricePerStay": "total $152"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": false,
+                "noCCRequired": false
+            },
+            "type": "EC"
+        },
+        "neighbourhood": "Little Ferry",
+        "deals": {},
+        "messaging": {
+            "scarcity": "4 left on our app"
+        },
+        "badging": {},
+        "pimmsAttributes": "DoubleStamps|TESCO",
+        "coordinate": {
+            "lat": 40.854608,
+            "lon": -74.033352
+        },
+        "roomsLeft": 4,
+        "providerType": "LOCAL",
+        "supplierHotelId": 2223555,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/3000000/2230000/2223600/2223555/b3c493f3_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    },
+    {
+        "id": 1327544800,
+        "name": "Hotel Key LaGuardia Airport",
+        "starRating": 3.0,
+        "urls": {},
+        "address": {
+            "streetAddress": "33-53 Farrington St",
+            "extendedAddress": "",
+            "locality": "Flushing",
+            "postalCode": "11354",
+            "region": "NY",
+            "countryName": "United States",
+            "countryCode": "us",
+            "obfuscate": false
+        },
+        "welcomeRewards": {
+            "collect": true
+        },
+        "guestReviews": {
+            "unformattedRating": 5.8,
+            "rating": "5.8",
+            "total": 226,
+            "scale": 10
+        },
+        "landmarks": [
+            {
+                "label": "City center",
+                "distance": "8.1 miles"
+            },
+            {
+                "label": "Times Square",
+                "distance": "8.1 miles"
+            }
+        ],
+        "geoBullets": [],
+        "ratePlan": {
+            "price": {
+                "current": "$130",
+                "exactCurrent": 129.92,
+                "old": "$146",
+                "fullyBundledPricePerStay": "total $153"
+            },
+            "features": {
+                "freeCancellation": false,
+                "paymentPreference": true,
+                "noCCRequired": false
+            },
+            "type": "Dual"
+        },
+        "neighbourhood": "Linden Hill",
+        "deals": {
+            "secretPrice": {
+                "dealText": "Save more with Secret Prices"
+            },
+            "priceReasoning": "DRR-443"
+        },
+        "messaging": {
+            "scarcity": "4 left on our app"
+        },
+        "badging": {},
+        "pimmsAttributes": "DoubleStamps|D13",
+        "coordinate": {
+            "lat": 40.765348,
+            "lon": -73.831755
+        },
+        "roomsLeft": 4,
+        "providerType": "LOCAL",
+        "supplierHotelId": 41454525,
+        "isAlternative": false,
+        "optimizedThumbUrls": {
+            "srpDesktop": "https://exp.cdn-hotels.com/hotels/42000000/41460000/41454600/41454525/86f964bf_z.jpg?impolicy=fcrop&w=250&h=140&q=high"
+        }
+    }
+]
