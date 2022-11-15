@@ -4,19 +4,12 @@ import requests
 from googletrans import Translator
 
 
-# Функция переводит название города с русского на английский
-def translate_name_town(name_town: str = "Нью Йорк") -> str:
-    translator = Translator()
-    return translator.translate(name_town).text
-
-
-name_town = translate_name_town() # Переведенное название города
-# print(name_town)
+name_town = 'нью йорк'
 
 # Ищем город и любые совпадения по последнему способу, для нахождения gaiaId
 url = "https://hotels4.p.rapidapi.com/locations/v3/search"
 
-querystring = {"q": name_town, "locale": "en_US", "langid": "1034", "siteid": "300000001"}
+querystring = {"q": name_town, "locale": "ru_RU", "langid": "1034", "siteid": "300000001"}
 
 headers = {
     "X-RapidAPI-Key": "d9c90351d9msh10767cdef300ff9p16ad25jsn931121e2d5e6",
