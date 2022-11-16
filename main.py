@@ -1,11 +1,12 @@
 from user_class import User
 from my_bot import my_bot
 from get_town import get_town
+from callback_data import callback_data
 
 
 @my_bot.message_handler(commands=['start'])
 def start(message) -> None:
-    user = User.get_user(message.chat.id)
+    User.get_user(message.chat.id)
     my_bot.send_message(message.from_user.id, "Привет, я бот для поиска отелей. \nВведи /help для списка команд")
 
 

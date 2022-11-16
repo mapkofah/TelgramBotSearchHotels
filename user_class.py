@@ -11,8 +11,9 @@ class User:
         self.city_id = None
         self.hotels_amount = None
         self.user_command = None
-        self.check_in = None
-        self.check_out = None
+        self.check_in = []
+        self.check_out = []
+        self.flag_check_in = False
         self.sort_type = None
         self.hotels_list = []
         self.need_to_get_photo = None
@@ -35,3 +36,6 @@ class User:
     def del_user(user_id):
         if User.all_users.get(user_id):
             del User.all_users.get[user_id]
+list = ['1', '2']
+list = '-'.join(list.reverse())
+print()
