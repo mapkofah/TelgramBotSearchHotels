@@ -2,7 +2,12 @@ import requests
 import json
 
 
-def data_town(name: str, gaiaId: str):
+def data_town(name: str, gaiaId: str) -> str:
+    """
+    Функция для запроса destinationId города с API Hotels.com
+    :param name: Название города
+    :param gaiaId: gaiaId города для
+    """
     url = "https://hotels4.p.rapidapi.com/locations/v2/search"
 
     querystring = {"query": name, "locale": "ru_RU", "currency": "USD"}

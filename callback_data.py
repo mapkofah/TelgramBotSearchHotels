@@ -1,14 +1,16 @@
-from telebot import types
-
 from data_town import data_town
 from get_date import get_year
 from my_bot import my_bot
 from user_class import User
-from get_town import get_towns_in_api, get_town
+from get_town import get_towns_in_api
 
 
 @my_bot.callback_query_handler(func=lambda call: True)
 def callback_data(call):
+    """
+    Обработка сообщения с Inline кнопки
+    :param call: данные с кнопки
+    """
     chat_id = call.message.chat.id
     user = User.get_user(chat_id)
     if call.data == 'back':
@@ -22,6 +24,6 @@ def callback_data(call):
         my_bot.delete_message(call.message.chat.id, call.message.message_id)
         get_year(call.message)
     elif call.data == 'yes_date':
+        user.flag_check_in = True
         user.check_in.reverse()
-        user.check_in = '-'.join(user.check_in)
 

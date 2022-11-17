@@ -36,6 +36,3 @@ class User:
     def del_user(user_id):
         if User.all_users.get(user_id):
             del User.all_users.get[user_id]
-list = ['1', '2']
-list = '-'.join(list.reverse())
-print()

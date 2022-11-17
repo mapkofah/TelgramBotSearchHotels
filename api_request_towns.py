@@ -3,7 +3,7 @@ from typing import Tuple, List
 import requests
 
 
-def api_request_towns(name: str) -> List[Tuple]:
+def api_request_towns(name: str) -> List[dict]:
     """
     Функция получения данных с API Hotels.com о предложенных города
     :param name: Название города

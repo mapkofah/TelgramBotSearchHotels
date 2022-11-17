@@ -20,11 +20,17 @@ def call_help(message):
 
 @my_bot.message_handler(commands=['lowprice'])
 def lowprice(message):
+    """
+    Обработка команды lowprice
+    """
     get_town(message)
 
 
 @my_bot.message_handler(commands=['highprice'])
 def highprice(message):
+    """
+    Обработка команды highprice
+    """
     user = User.get_user(message.chat.id)
     user.user_command = 'highprice'
     my_bot.send_message(message.from_user.id, 'Введите название города: ')
@@ -32,6 +38,9 @@ def highprice(message):
 
 @my_bot.message_handler(commands=['bestdeal'])
 def bestdeal(message):
+    """
+    Обработка команды bestdeal
+    """
     user = User.get_user(message.chat.id)
     user.user_command = 'bestdeal'
     my_bot.send_message(message.from_user.id, 'Введите название города: ')
@@ -39,6 +48,9 @@ def bestdeal(message):
 
 @my_bot.message_handler(commands=['history'])
 def history(message):
+    """
+    Обработка команды history
+    """
     user = User.get_user(message.chat.id)
     user.user_command = 'history'
     my_bot.send_message(message.from_user.id, 'В разработке. /help')
@@ -46,7 +58,11 @@ def history(message):
 
 @my_bot.message_handler(content_types=['text', 'image', 'audio', 'document', 'video'])
 def get_message(message) -> None:
+    """
+    Обработка любых сообщений вне команд
+    """
     my_bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help")
+
 
 my_bot.polling(none_stop=True, interval=0)
 

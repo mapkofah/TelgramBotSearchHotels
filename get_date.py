@@ -3,29 +3,48 @@ from telebot import types
 from calendar import monthrange
 from my_bot import my_bot
 from user_class import User
-from datetime import datetime
+import datetime
 
 
-def get_year(message):
+def get_year(message) -> None:
+    """
+    Создает клавиатуру и предлагает выбор года
+    """
     chat_id = message.chat.id
+    user = User.get_user(chat_id)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*[types.InlineKeyboardButton(year) for year in ['2022', '2023']])
+    years = ['2022', '2023']
+    if user.flag_check_in:
+        index = years.index(user.check_in)
+        years = years[index:]
+    keyboard.add(*[types.InlineKeyboardButton(year) for year in years])
     years = my_bot.send_message(chat_id, 'Выберите год', reply_markup=keyboard)
     my_bot.register_next_step_handler(years, get_month)
 
 
-def get_month(message):
+def get_month(message) -> None:
+    """
+    Создает клавиатуру месяцев и предлагает выбор
+    """
     chat_id = message.chat.id
     user = User.get_user(chat_id)
+    months = ["Январь", "Февраль", "Март",
+     "Апрель", "Май", "Июнь",
+     "Июль", "Август", "Сентябрь",
+     "Октябрь", "Ноябрь", "Декабрь"]
     if not user.flag_check_in:
         user.check_in.append(message.text)
     else:
         user.check_out = message.text
+    year_now = str(datetime.datetime.now().year)
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True) ### check_out сделать что бы дата была от числа check_in
-    keyboard.add(*[types.InlineKeyboardButton(month) for month in ["Январь", "Февраль", "Март",
-                                                                   "Апрель", "Май", "Июнь",
-                                                                   "Июль", "Август", "Сентябрь",
-                                                                   "Октябрь", "Ноябрь", "Декабрь"]])
+    if message.text == year_now:
+        month_now = datetime.datetime.now().month - 1
+        months = months[month_now:]
+    elif user.flag_check_in:
+        index = months.index(user.check_in[1])
+        months = months[index:]
+    keyboard.add(*[types.InlineKeyboardButton(month) for month in months])
     months = my_bot.send_message(chat_id, 'Выберите месяц', reply_markup=keyboard)
     my_bot.register_next_step_handler(months, get_day)
 
@@ -44,10 +63,15 @@ def get_day(message):
         days_list = list(range(1, 31))
     else:
         days_list = list(range(1, 32))
+    month_now = datetime.datetime.now().month
+    num_month = datetime.datetime.strptime(message.text, "%B").month
+    day_now = datetime.datetime.now().day - 1
+    if month_now == num_month:
+        days_list = days_list[day_now:]
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.row(*[types.InlineKeyboardButton(day) for day in days_list[:10]])
-    keyboard.row(*[types.InlineKeyboardButton(day) for day in days_list[10:21]])
-    keyboard.row(*[types.InlineKeyboardButton(day) for day in days_list[21:]])
+    keyboard.row(*[types.InlineKeyboardButton(day) for day in days_list[:len(days_list) // 3]])
+    keyboard.row(*[types.InlineKeyboardButton(day) for day in days_list[len(days_list) // 3:len(days_list) - len(days_list) // 3]])
+    keyboard.row(*[types.InlineKeyboardButton(day) for day in days_list[len(days_list) - len(days_list) // 3:]])
     days = my_bot.send_message(chat_id, 'Выберите день', reply_markup=keyboard)
     my_bot.register_next_step_handler(days, confirm_date)
 
@@ -75,9 +99,8 @@ def confirm_date(message):
         my_bot.send_message(chat_id, f'Дата выезда {"-".join(user.check_out)}?', reply_markup=keyboard)
 
 
-
 locale.setlocale(
     category=locale.LC_ALL,
-    locale="Russian"  # Note: do not use "de_DE" as it doesn't work
+    locale="Russian"
 )
 
