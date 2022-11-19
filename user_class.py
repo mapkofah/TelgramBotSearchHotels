@@ -14,6 +14,8 @@ class User:
         self.check_in = []
         self.check_out = []
         self.flag_check_in = False
+        self.flag_last_day_month = False
+        self.flag_last_month = False
         self.sort_type = None
         self.hotels_list = []
         self.need_to_get_photo = None

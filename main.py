@@ -1,3 +1,4 @@
+from get_date import get_year
 from user_class import User
 from my_bot import my_bot
 from get_town import get_town
@@ -23,8 +24,8 @@ def lowprice(message):
     """
     Обработка команды lowprice
     """
-    get_town(message)
-
+    # get_town(message)
+    get_year(message)
 
 @my_bot.message_handler(commands=['highprice'])
 def highprice(message):
