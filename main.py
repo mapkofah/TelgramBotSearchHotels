@@ -1,31 +1,26 @@
 from get_date import get_year
+from low_price import func_low_price
 from user_class import User
 from my_bot import my_bot
+from help import user_help
 from get_town import get_town
 from callback_data import callback_data
 
 
 @my_bot.message_handler(commands=['start'])
 def start(message) -> None:
-    User.get_user(message.chat.id)
     my_bot.send_message(message.from_user.id, "Привет, я бот для поиска отелей. \nВведи /help для списка команд")
 
 
 @my_bot.message_handler(commands=['help'])
 def call_help(message):
-    my_bot.send_message(message.from_user.id, '/lowprice: Топ самых дешёвых отелей в городе.\n'
-                                              '/highprice: Топ самых дорогих отелей в городе.\n'
-                                              '/bestdeal: Топ отелей, наиболее дешёвых и ближе всего к центру.\n'
-                                              '/history Узнать историю поиска отелей')
+    user_help(message)
 
 
 @my_bot.message_handler(commands=['lowprice'])
 def lowprice(message):
-    """
-    Обработка команды lowprice
-    """
-    # get_town(message)
-    get_year(message)
+    func_low_price(message)
+
 
 @my_bot.message_handler(commands=['highprice'])
 def highprice(message):

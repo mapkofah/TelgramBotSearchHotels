@@ -18,7 +18,8 @@ class User:
         self.flag_last_month = False
         self.sort_type = None
         self.hotels_list = []
-        self.need_to_get_photo = None
+        self.need_to_get_photo = False
+        self.amount_photo = None
         self.price_range = None
         self.distance_range = None
         User.add_user(user_id, self)
@@ -37,4 +38,5 @@ class User:
     @staticmethod
     def del_user(user_id):
         if User.all_users.get(user_id):
-            del User.all_users.get[user_id]
+            User.all_users.pop(user_id)
+

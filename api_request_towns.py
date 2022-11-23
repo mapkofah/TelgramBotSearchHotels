@@ -1,11 +1,12 @@
 import json
-from typing import Tuple, List
+from typing import List
+
 import requests
 
 
 def api_request_towns(name: str) -> List[dict]:
     """
-    Функция получения данных с API Hotels.com о предложенных города
+    Функция получения данных с API Hotels.com о предложенных городах
     :param name: Название города
     :return: Список городов подходящих под введенное название
     """

@@ -1,10 +1,15 @@
-from telebot import types
+import datetime
 
-from data_town import data_town
+from telebot import types
+import locale
+
+from api_request_hotels import api_request_hotel
 from get_date import get_year
 from my_bot import my_bot
+from need_photos import amount_photos
 from user_class import User
 from get_town import get_towns_in_api
+from amount_hotels_page import amount_hotels_page
 
 
 @my_bot.callback_query_handler(func=lambda call: True)
@@ -32,7 +37,15 @@ def callback_data(call):
             get_year(call.message)
         else:
             user.check_out.reverse()
-            my_bot.send_message(chat_id, 'Получилось получить дату вьезда и выезда', reply_markup=types.ReplyKeyboardRemove())
+            user.check_in = '-'.join(user.check_in)
+            if len(user.check_out) == 3:
+                user.check_out = '-'.join(user.check_out)
+            user.check_in = str(datetime.datetime.strptime(user.check_in, '%Y-%B-%d'))[:10]
+            user.check_out = str(datetime.datetime.strptime(user.check_out, '%Y-%B-%d'))[:10]
+            my_bot.delete_message(call.message.chat.id, call.message.message_id)
+            my_bot.send_message(chat_id, f'Въезд {user.check_in} \nВыезд {user.check_out}', reply_markup=types.ReplyKeyboardRemove())
+            amount_hotels_page(call.message)
+
     elif call.data == 'no_date':
         my_bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                  text="Введите дату еще раз: ")
@@ -41,5 +54,15 @@ def callback_data(call):
         else:
             user.check_out = []
         get_year(call.message)
+    elif call.data == 'yes_photos':
+        user.need_to_get_photo = True
+        msg = my_bot.send_message(chat_id, 'Введите количество фотографий каждого отеля. (максимум 5)')
+        my_bot.register_next_step_handler(msg, amount_photos)
+    elif call.data == 'no_photos':
+        api_request_hotel(call.message)
 
 
+locale.setlocale(
+    category=locale.LC_ALL,
+    locale="Russian"
+)
