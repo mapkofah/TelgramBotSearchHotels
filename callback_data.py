@@ -4,7 +4,9 @@ from telebot import types
 import locale
 
 from api_request_hotels import api_request_hotel
+from data_town import data_town
 from get_date import get_year
+from get_hotels import get_hotels
 from my_bot import my_bot
 from need_photos import amount_photos
 from user_class import User
@@ -23,17 +25,18 @@ def callback_data(call):
     if call.data == 'back':
         my_bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Введите название города: ")
         my_bot.register_next_step_handler(call.message, get_towns_in_api)
-    # elif user.user_command != '/history' and not user.city:
-    #     user.city = call.data
-    #     user.city_gaiaId = user.towns_dict.get(call.data)
-    #     destinationId = data_town(call.data, user.city_gaiaId)
-    #     user.city_id = destinationId
-    #     my_bot.delete_message(call.message.chat.id, call.message.message_id)
-    #     get_year(call.message)
+    elif user.user_command != '/history' and not user.city:
+        user.city = call.data
+        user.city_gaiaId = user.towns_dict.get(call.data)
+        destinationId = data_town(call.data, user.city_gaiaId)
+        user.city_id = destinationId
+        my_bot.delete_message(call.message.chat.id, call.message.message_id)
+        get_year(call.message)
     elif call.data == 'yes_date':
         if not user.flag_check_in:
             user.check_in.reverse()
             user.flag_check_in = True
+            my_bot.delete_message(call.message.chat.id, call.message.message_id)
             get_year(call.message)
         else:
             user.check_out.reverse()
@@ -56,11 +59,10 @@ def callback_data(call):
         get_year(call.message)
     elif call.data == 'yes_photos':
         user.need_to_get_photo = True
-        msg = my_bot.send_message(chat_id, 'Введите количество фотографий каждого отеля. (максимум 5)')
-        my_bot.register_next_step_handler(msg, amount_photos)
+        my_bot.send_message(chat_id, 'Введите количество фотографий каждого отеля. (максимум 5)')
+        my_bot.register_next_step_handler(call.message, amount_photos)
     elif call.data == 'no_photos':
-        api_request_hotel(call.message)
-
+        get_hotels(call.message)
 
 locale.setlocale(
     category=locale.LC_ALL,

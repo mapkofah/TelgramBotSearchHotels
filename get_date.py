@@ -19,7 +19,7 @@ def get_year(message) -> None:
     else:
         my_bot.send_message(chat_id, 'Выберите дату выезда:', reply_markup=types.ReplyKeyboardRemove())
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    years = ['2022', '2023', '2024']
+    years = ['2022', '2023']
     if user.flag_check_in:
         index = years.index(user.check_in[0])
         if user.flag_last_day_month and user.flag_last_month:
@@ -50,8 +50,9 @@ def get_month(message) -> None:
             if year_now > year or year > year_now + 2:
                 raise ValueError
     except ValueError:
-        my_bot.send_message(chat_id, 'Что-то не так с годом,'
-                                     ' выберите из предложенных или введите год в диапазоне 2022-2024')
+        my_bot.send_message(chat_id, 'Что-то не так с годом.\n '
+                                     'Выберите из предложенных или введите год в диапазоне 2022-2024')
+        my_bot.send_message(chat_id, 'Для возврата к началу /help')
         get_year(message)
     except FileNotFoundError:
         user_help(message)
@@ -96,6 +97,7 @@ def get_day(message):
     except ValueError:
         my_bot.send_message(chat_id, 'Проблемы с месяцем, выберите из предложенных.'
                                      ' Либо введите в формате: (Январь, Февраль, Март и т.п.)')
+        my_bot.send_message(chat_id, 'Для возврата к началу /help')
         get_month(message)
     except FileNotFoundError:
         user_help(message)
@@ -163,6 +165,7 @@ def confirm_date(message):
         my_bot.send_message(chat_id,
                             'Какой-то странный день, выберите из предложенных, либо введите верное число',
                             reply_markup=types.ReplyKeyboardRemove())
+        my_bot.send_message(chat_id, 'Для возврата к началу /help')
         get_day(message)
     except FileNotFoundError:
         user_help(message)

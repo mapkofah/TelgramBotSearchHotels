@@ -19,10 +19,11 @@ def check_amount(message):
     user = User.get_user(chat_id)
     try:
         amount = int(message.text)
-        if amount > 25:
+        if amount > 25 or amount < 1:
             raise ValueError
-        user.hotels_amount = amount
-        need_photo(message)
     except:
         my_bot.send_message(chat_id, 'Ошибка ввода, введите еще раз цифрами не больше 25')
         amount_hotels_page(message)
+    else:
+        user.page_size = amount
+        need_photo(message)

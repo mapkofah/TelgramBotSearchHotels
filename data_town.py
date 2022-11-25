@@ -13,7 +13,7 @@ def data_town(name: str, gaiaId: str) -> str:
     querystring = {"query": name, "locale": "ru_RU", "currency": "USD"}
 
     headers = {
-        "X-RapidAPI-Key": "d9c90351d9msh10767cdef300ff9p16ad25jsn931121e2d5e6",
+        "X-RapidAPI-Key": "7a3d6d2995mshf9c37390f4ee1cep19c9c4jsnd3e2202a6ebc",
         "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
     }
 
@@ -24,4 +24,3 @@ def data_town(name: str, gaiaId: str) -> str:
         if item['geoId'] == gaiaId:
             destinationId = item['destinationId']  # Нашли верный destinationId
             return destinationId
-

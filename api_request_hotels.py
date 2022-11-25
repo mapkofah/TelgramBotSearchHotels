@@ -1,13 +1,34 @@
-from my_bot import my_bot
+import json
+from typing import List
+import requests
 from user_class import User
 
 
-def api_request_hotel(message):
+def api_request_hotel(message) -> List[dict]:
+    """
+    Функция получения данных с API Hotels.com об отелях
+    """
     chat_id = message.chat.id
     user = User.get_user(chat_id)
-    my_bot.send_message(chat_id, 'Здесь будет функция для загрузки отелей с сайта')
-#Загружаем список отелей с сайта
-#Проверяем доступность вариантов
-#Сохраняем список
-#Выводим пользователю в нужном количестве на кнопках(с фото или без) с ценой
-#Делаем несколько страниц с перелистыванием
+    if user.user_command == '/lowprice':
+        sortOrder = 'PRICE'
+    elif user.user_command == '/highprice':
+        sortOrder = 'PRICE_HIGHEST_FIRST'
+    else:
+        sortOrder = 'DISTANCE_FROM_LANDMARK'
+        # Самые дешевые и находятся ближе всего к центру
+    url = "https://hotels4.p.rapidapi.com/properties/list"
+
+    querystring = {"destinationId": user.city_id, "pageNumber": user.page_num, "pageSize": user.page_size, "checkIn": user.check_in,
+                   "checkOut": user.check_out, "adults1": "2", "sortOrder": sortOrder, "locale": "en_US", "currency": "RUB"}
+
+    headers = {
+        "X-RapidAPI-Key": "7a3d6d2995mshf9c37390f4ee1cep19c9c4jsnd3e2202a6ebc",
+        "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    end = json.loads(response.text)
+
+    return end['data']['body']["searchResults"]['results']
+

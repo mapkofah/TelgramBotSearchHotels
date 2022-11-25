@@ -1,6 +1,7 @@
 from telebot import types
 
 from api_request_hotels import api_request_hotel
+from get_hotels import get_hotels
 from my_bot import my_bot
 from user_class import User
 
@@ -19,11 +20,11 @@ def amount_photos(message):
     user = User.get_user(chat_id)
     try:
         amount = int(message.text)
-        if amount > 5:
+        if amount > 5 or amount < 1:
             raise OverflowError
     except:
         msg = my_bot.send_message(chat_id, 'Ошибочно введено количество фотографий, введите число до 5')
         my_bot.register_next_step_handler(msg, amount_photos)
     else:
         user.amount_photo = int(message.text)
-        api_request_hotel(message)
+        get_hotels(message)

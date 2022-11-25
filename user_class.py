@@ -9,7 +9,8 @@ class User:
         self.city = None
         self.city_gaiaId = None
         self.city_id = None
-        self.hotels_amount = None
+        self.page_num = 1
+        self.page_size = None
         self.user_command = None
         self.check_in = []
         self.check_out = []
@@ -19,6 +20,7 @@ class User:
         self.sort_type = None
         self.hotels_list = []
         self.need_to_get_photo = False
+        self.dict_photos = {}
         self.amount_photo = None
         self.price_range = None
         self.distance_range = None
