@@ -8,12 +8,12 @@ def api_request_photo(hotel_id):
     querystring = {"id": hotel_id}
 
     headers = {
-        "X-RapidAPI-Key": "7a3d6d2995mshf9c37390f4ee1cep19c9c4jsnd3e2202a6ebc",
-        "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
+        'X-RapidAPI-Key': '9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3',
+        'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     end = json.loads(response.text)
-
+    with open('my_test_photo.json', 'w') as file:
+        json.dump(end['hotelImages'], file)
     return end['hotelImages']
-

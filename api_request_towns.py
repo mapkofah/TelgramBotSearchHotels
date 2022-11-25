@@ -15,8 +15,8 @@ def api_request_towns(name: str) -> List[dict]:
     querystring = {"q": name, "locale": "ru_RU", "langid": "1034", "siteid": "300000001"}
 
     headers = {
-        "X-RapidAPI-Key": "7a3d6d2995mshf9c37390f4ee1cep19c9c4jsnd3e2202a6ebc",
-        "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
+        'X-RapidAPI-Key': '9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3',
+        'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
     end = json.loads(response.text)

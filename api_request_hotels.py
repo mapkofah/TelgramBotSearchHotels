@@ -19,16 +19,17 @@ def api_request_hotel(message) -> List[dict]:
         # Самые дешевые и находятся ближе всего к центру
     url = "https://hotels4.p.rapidapi.com/properties/list"
 
-    querystring = {"destinationId": user.city_id, "pageNumber": user.page_num, "pageSize": user.page_size, "checkIn": user.check_in,
-                   "checkOut": user.check_out, "adults1": "2", "sortOrder": sortOrder, "locale": "en_US", "currency": "RUB"}
+    querystring = {"destinationId": user.city_id, "pageNumber": user.page_num, "pageSize": user.page_size,
+                   "checkIn": user.check_in,
+                   "checkOut": user.check_out, "adults1": "2", "sortOrder": sortOrder, "locale": "en_US",
+                   "currency": "RUB"}
 
     headers = {
-        "X-RapidAPI-Key": "7a3d6d2995mshf9c37390f4ee1cep19c9c4jsnd3e2202a6ebc",
-        "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
+        'X-RapidAPI-Key': '9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3',
+        'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     end = json.loads(response.text)
 
     return end['data']['body']["searchResults"]['results']
-

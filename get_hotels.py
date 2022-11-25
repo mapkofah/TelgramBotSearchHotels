@@ -1,5 +1,8 @@
 import re
 from typing import List, Dict
+
+from telebot import types
+
 from api_request_hotels import api_request_hotel
 from get_photos import get_photo
 from my_bot import my_bot
@@ -10,6 +13,8 @@ from user_class import User
 def get_hotels(message):
     chat_id = message.chat.id
     user = User.get_user(chat_id)
+    user.dict_photos.clear()
+    user.hotels_list.clear()
     msg = my_bot.send_message(chat_id, 'Загружаю данные...')
     api_hotels_list = api_request_hotel(message)[:]
     user.hotels_list = create_hotels_list(chat_id, api_hotels_list)

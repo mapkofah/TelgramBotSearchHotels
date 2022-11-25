@@ -30,13 +30,13 @@ def callback_data(call):
         user.city_gaiaId = user.towns_dict.get(call.data)
         destinationId = data_town(call.data, user.city_gaiaId)
         user.city_id = destinationId
-        my_bot.delete_message(call.message.chat.id, call.message.message_id)
+        my_bot.delete_message(chat_id, call.message.message_id)
         get_year(call.message)
     elif call.data == 'yes_date':
         if not user.flag_check_in:
             user.check_in.reverse()
             user.flag_check_in = True
-            my_bot.delete_message(call.message.chat.id, call.message.message_id)
+            my_bot.delete_message(chat_id, call.message.message_id)
             get_year(call.message)
         else:
             user.check_out.reverse()
@@ -45,7 +45,7 @@ def callback_data(call):
                 user.check_out = '-'.join(user.check_out)
             user.check_in = str(datetime.datetime.strptime(user.check_in, '%Y-%B-%d'))[:10]
             user.check_out = str(datetime.datetime.strptime(user.check_out, '%Y-%B-%d'))[:10]
-            my_bot.delete_message(call.message.chat.id, call.message.message_id)
+            my_bot.delete_message(chat_id, call.message.message_id)
             my_bot.send_message(chat_id, f'Въезд {user.check_in} \nВыезд {user.check_out}', reply_markup=types.ReplyKeyboardRemove())
             amount_hotels_page(call.message)
 
@@ -63,6 +63,19 @@ def callback_data(call):
         my_bot.register_next_step_handler(call.message, amount_photos)
     elif call.data == 'no_photos':
         get_hotels(call.message)
+    elif call.data == 'next_page':
+        my_bot.delete_message(chat_id, call.message.message_id)
+        user.page_num += 1
+        get_hotels(call.message)
+    elif call.data == 'prev_page':
+        my_bot.delete_message(chat_id, call.message.message_id)
+        user.page_num -= 1
+        get_hotels(call.message)
+    elif call.data == 'home_page':
+        my_bot.delete_message(chat_id, call.message.message_id)
+        user.page_num = 1
+        get_hotels(call.message)
+
 
 locale.setlocale(
     category=locale.LC_ALL,
