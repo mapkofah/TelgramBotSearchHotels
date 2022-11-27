@@ -14,6 +14,5 @@ def api_request_photo(hotel_id):
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     end = json.loads(response.text)
-    with open('my_test_photo.json', 'w') as file:
-        json.dump(end['hotelImages'], file)
+
     return end['hotelImages']
