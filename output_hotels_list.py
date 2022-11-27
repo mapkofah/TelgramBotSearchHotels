@@ -15,7 +15,7 @@ def output_hotels(message):
     keyboard.add(next_page)
     if user.page_num != 1:
         keyboard.add(prev_page)
-    keyboard.add(home_page)
+        keyboard.add(home_page)
     try:
         if user.need_to_get_photo:
             index = 0
