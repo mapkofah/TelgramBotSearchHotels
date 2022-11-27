@@ -1,9 +1,8 @@
 from telebot import types
 
-from api_request_hotels import api_request_hotel
-from get_hotels import get_hotels
-from my_bot import my_bot
-from user_class import User
+from Files_For_Get_Hotels.get_hotels import get_hotels
+from Bot_Files.my_bot import my_bot
+from Bot_Files.user_class import User
 
 
 def need_photo(message):

@@ -1,13 +1,11 @@
 import re
 from typing import List, Dict
 
-from telebot import types
-
-from api_request_hotels import api_request_hotel
-from get_photos import get_photo
-from my_bot import my_bot
-from output_hotels_list import output_hotels
-from user_class import User
+from Files_For_Get_Hotels.api_request_hotels import api_request_hotel
+from Files_For_Get_Photos.get_photos import get_photo
+from Bot_Files.my_bot import my_bot
+from Files_For_Get_Hotels.output_hotels_list import output_hotels
+from Bot_Files.user_class import User
 
 
 def get_hotels(message):

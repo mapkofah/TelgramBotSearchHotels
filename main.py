@@ -1,9 +1,9 @@
-from low_price import func_low_price
-from user_class import User
-from my_bot import my_bot
-from help import user_help
-#Не удалять, принимает данные с кнопок
-from callback_data import callback_data
+from Bot_Commands.low_price import func_low_price
+from Bot_Files.user_class import User
+from Bot_Files.my_bot import my_bot
+from Bot_Commands.help import user_help
+
+from Bot_Files.callback_data import callback_data #Не удалять, принимает данные с кнопок
 
 
 @my_bot.message_handler(commands=['start'])

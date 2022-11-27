@@ -1,8 +1,7 @@
 from telebot import types
 
-from api_request_photos import api_request_photo
-from my_bot import my_bot
-from user_class import User
+from Files_For_Get_Photos.api_request_photos import api_request_photo
+from Bot_Files.user_class import User
 
 
 def get_photo(chat_id):
