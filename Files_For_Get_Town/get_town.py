@@ -1,7 +1,7 @@
 from telebot import types
-from my_bot import my_bot
-from user_class import User
-from api_request_towns import api_request_towns
+from Bot_Files.my_bot import my_bot
+from Bot_Files.user_class import User
+from Files_For_Get_Town.api_request_towns import api_request_towns
 
 
 def get_town(message):

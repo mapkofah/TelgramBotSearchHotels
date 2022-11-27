@@ -1,8 +1,8 @@
 from telebot import types
 
-from help import user_help
-from my_bot import my_bot
-from user_class import User
+from Bot_Commands.help import user_help
+from Bot_Files.my_bot import my_bot
+from Bot_Files.user_class import User
 
 
 def output_hotels(message):

@@ -3,15 +3,14 @@ import datetime
 from telebot import types
 import locale
 
-from api_request_hotels import api_request_hotel
-from data_town import data_town
-from get_date import get_year
-from get_hotels import get_hotels
-from my_bot import my_bot
-from need_photos import amount_photos
-from user_class import User
-from get_town import get_towns_in_api
-from amount_hotels_page import amount_hotels_page
+from Files_For_Get_Town.data_town import data_town
+from Files_For_Get_Date.get_date import get_year
+from Files_For_Get_Hotels.get_hotels import get_hotels
+from Bot_Files.my_bot import my_bot
+from Files_For_Get_Photos.need_photos import amount_photos
+from Bot_Files.user_class import User
+from Files_For_Get_Town.get_town import get_towns_in_api
+from Files_For_Get_Hotels.amount_hotels_page import amount_hotels_page
 
 
 @my_bot.callback_query_handler(func=lambda call: True)

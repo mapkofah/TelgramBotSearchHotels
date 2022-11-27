@@ -1,7 +1,7 @@
 import json
 from typing import List
 import requests
-from user_class import User
+from Bot_Files.user_class import User
 
 
 def api_request_hotel(message) -> List[dict]:

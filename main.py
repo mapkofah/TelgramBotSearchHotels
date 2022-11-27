@@ -1,10 +1,9 @@
-from high_price import func_high_price
-from low_price import func_low_price
-from user_class import User
-from my_bot import my_bot
-from help import user_help
-#Не удалять, принимает данные с кнопок
-from callback_data import callback_data
+from Bot_Commands.low_price import func_low_price
+from Bot_Files.user_class import User
+from Bot_Files.my_bot import my_bot
+from Bot_Commands.help import user_help
+
+from Bot_Files.callback_data import callback_data #Не удалять, принимает данные с кнопок
 
 
 @my_bot.message_handler(commands=['start'])
@@ -13,28 +12,27 @@ def start(message) -> None:
 
 
 @my_bot.message_handler(commands=['help'])
-def call_help(message) -> None:
+def call_help(message):
     user_help(message)
 
 
 @my_bot.message_handler(commands=['lowprice'])
-def lowprice(message) -> None:
-    """
-    Обработка команды lowprice
-    """
+def lowprice(message):
     func_low_price(message)
 
 
 @my_bot.message_handler(commands=['highprice'])
-def highprice(message) -> None:
+def highprice(message):
     """
     Обработка команды highprice
     """
-    func_high_price(message)
+    user = User.get_user(message.chat.id)
+    user.user_command = 'highprice'
+    my_bot.send_message(message.from_user.id, 'Введите название города: ')
 
 
 @my_bot.message_handler(commands=['bestdeal'])
-def bestdeal(message) -> None:
+def bestdeal(message):
     """
     Обработка команды bestdeal
     """
@@ -44,7 +42,7 @@ def bestdeal(message) -> None:
 
 
 @my_bot.message_handler(commands=['history'])
-def history(message) -> None:
+def history(message):
     """
     Обработка команды history
     """

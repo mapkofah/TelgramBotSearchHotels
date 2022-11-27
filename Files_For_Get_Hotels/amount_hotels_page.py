@@ -1,6 +1,6 @@
-from my_bot import my_bot
-from user_class import User
-from need_photos import need_photo
+from Bot_Files.my_bot import my_bot
+from Bot_Files.user_class import User
+from Files_For_Get_Photos.need_photos import need_photo
 
 
 def amount_hotels_page(message):
