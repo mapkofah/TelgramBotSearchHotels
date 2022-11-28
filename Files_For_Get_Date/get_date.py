@@ -129,8 +129,9 @@ def get_day(message):
             if month_now == num_month:
                 days_list = days_list[day_now:]
         elif user.flag_check_in and not user.flag_last_day_month:
-            index = int(user.check_in[2])
-            days_list = days_list[index:]
+            if user.check_in[1] == message.text:
+                index = int(user.check_in[2])
+                days_list = days_list[index:]
         if len(days_list) <= 12:
             keyboard.add(*[types.InlineKeyboardButton(day) for day in days_list])
         else:
