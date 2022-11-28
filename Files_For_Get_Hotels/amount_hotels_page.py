@@ -4,7 +4,7 @@ from Bot_Files.user_class import User
 from Files_For_Get_Photos.need_photos import need_photo
 
 
-def amount_hotels_page(message):
+def amount_hotels_page(message) -> None:
     """
     Спрашивает пользователя о количестве вывода отелей на странице
     """
@@ -14,7 +14,7 @@ def amount_hotels_page(message):
     my_bot.register_next_step_handler(msg, check_amount)
 
 
-def check_amount(message):
+def check_amount(message) -> None:
     chat_id = message.chat.id
     user = User.get_user(chat_id)
     try:

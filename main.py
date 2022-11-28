@@ -1,3 +1,4 @@
+from Bot_Commands.best_deal import func_best_deal
 from Bot_Commands.low_price import func_low_price
 from Bot_Files.user_class import User
 from Bot_Files.my_bot import my_bot
@@ -28,12 +29,7 @@ def highprice(message) -> None:
 
 @my_bot.message_handler(commands=['bestdeal'])
 def bestdeal(message) -> None:
-    """
-    Обработка команды bestdeal
-    """
-    user = User.get_user(message.chat.id)
-    user.user_command = 'bestdeal'
-    my_bot.send_message(message.from_user.id, 'Введите название города: ')
+    func_best_deal(message)
 
 
 @my_bot.message_handler(commands=['history'])

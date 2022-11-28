@@ -4,7 +4,7 @@ from Bot_Files.user_class import User
 from Files_For_Get_Town.api_request_towns import api_request_towns
 
 
-def get_town(message):
+def get_town(message) -> None:
     chat_id = message.chat.id
     user = User.get_user(message.chat.id)
     user.user_command = message.text
@@ -12,7 +12,7 @@ def get_town(message):
     my_bot.register_next_step_handler(message, get_towns_in_api)
 
 
-def get_towns_in_api(message):
+def get_towns_in_api(message) -> None:
     name_city = message.text
     chat_id = message.chat.id
     user = User.get_user(message.chat.id)
