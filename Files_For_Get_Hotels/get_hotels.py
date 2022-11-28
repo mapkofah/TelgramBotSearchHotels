@@ -13,12 +13,12 @@ def get_hotels(message):
     user = User.get_user(chat_id)
     user.dict_photos.clear()
     user.hotels_list.clear()
-    msg = my_bot.send_message(chat_id, 'Загружаю данные...')
+    my_bot.edit_message_text(chat_id=chat_id, message_id=message.message_id, text='Загружаю данные...')
     api_hotels_list = api_request_hotel(message)[:]
     user.hotels_list = create_hotels_list(chat_id, api_hotels_list)
     if user.need_to_get_photo:
         get_photo(chat_id)
-    output_hotels(msg)
+    output_hotels(message)
 
 
 def create_hotels_list(chat_id, hotels_list_api: List[Dict]) -> List[str]:
@@ -32,8 +32,10 @@ def create_hotels_list(chat_id, hotels_list_api: List[Dict]) -> List[str]:
     hotels_list = []
     for hotel in hotels_list_api:
         name_hotel = hotel['name']
-        if not 'streetAddress' in hotel['address']:
-            continue
+        if 'streetAddress' in hotel['address']:
+            address = hotel['address']["streetAddress"]
+        else:
+            address = hotel['address']['locality']
         address = hotel['address']["streetAddress"]
         distance_miles = hotel['landmarks'][0]['distance']
         miles = re.search(r'\S*', distance_miles).group()
