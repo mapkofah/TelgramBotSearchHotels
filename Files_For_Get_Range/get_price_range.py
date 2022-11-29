@@ -32,7 +32,7 @@ def check_price(message) -> None:
     except FileNotFoundError:
         user_help(message)
     except ValueError:
-        msg = my_bot.send_message(chat_id, 'Неверный ввод, вводите минимальную цену цифрами')
+        msg = my_bot.send_message(chat_id, 'Неверный ввод, вводите цену цифрами')
         if not user.price_min:
             price_min(msg)
         else:
