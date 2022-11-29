@@ -21,7 +21,7 @@ def api_request_hotel(message) -> List[dict]:
 
     querystring = {"destinationId": user.city_id, "pageNumber": user.page_num, "pageSize": user.page_size,
                    "checkIn": user.check_in,
-                   "checkOut": user.check_out, "adults1": "2", "sortOrder": sortOrder, "locale": "en_US",
+                   "checkOut": user.check_out, "adults1": "1", "sortOrder": sortOrder, "locale": "en_US",
                    "currency": "RUB"}
 
     headers = {
