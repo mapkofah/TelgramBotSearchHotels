@@ -1,9 +1,6 @@
-import datetime
-
 from telebot import types
 import locale
 
-from Files_For_Get_Town.data_town import data_town
 from Files_For_Get_Date.get_date import get_year
 from Files_For_Get_Hotels.get_hotels import get_hotels
 from Bot_Files.my_bot import my_bot
@@ -26,35 +23,24 @@ def callback_data(call):
         my_bot.register_next_step_handler(call.message, get_towns_in_api)
     elif user.user_command != '/history' and not user.city:
         user.city = call.data
-        user.city_gaiaId = user.towns_dict.get(call.data)
-        destinationId = data_town(call.data, user.city_gaiaId)
-        user.city_id = destinationId
+        user.city_Id = user.towns_dict.get(call.data)
         my_bot.delete_message(chat_id, call.message.message_id)
         get_year(call.message)
     elif call.data == 'yes_date':
-        if not user.flag_check_in:
-            user.check_in.reverse()
-            user.flag_check_in = True
+        if not user.day_out:
             my_bot.delete_message(chat_id, call.message.message_id)
             get_year(call.message)
         else:
-            user.check_out.reverse()
-            user.check_in = '-'.join(user.check_in)
-            if len(user.check_out) == 3:
-                user.check_out = '-'.join(user.check_out)
-            user.check_in = str(datetime.datetime.strptime(user.check_in, '%Y-%B-%d'))[:10]
-            user.check_out = str(datetime.datetime.strptime(user.check_out, '%Y-%B-%d'))[:10]
             my_bot.delete_message(chat_id, call.message.message_id)
-            my_bot.send_message(chat_id, f'Въезд {user.check_in} \nВыезд {user.check_out}', reply_markup=types.ReplyKeyboardRemove())
+            my_bot.send_message(chat_id, f'Въезд {user.day_in}.{user.month_in}.{user.year_in} \nВыезд {user.day_out}.{user.month_out}.{user.year_out}', reply_markup=types.ReplyKeyboardRemove())
             amount_hotels_page(call.message)
-
     elif call.data == 'no_date':
         my_bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                  text="Введите дату еще раз: ")
-        if not user.flag_check_in:
-            user.check_in = []
+        if not user.day_out:
+            user.year_in, user.month_in, user.day_in = None, None, None
         else:
-            user.check_out = []
+            user.year_out, user.month_out, user.day_out = None, None, None
         get_year(call.message)
     elif call.data == 'yes_photos':
         user.need_to_get_photo = True
@@ -72,7 +58,7 @@ def callback_data(call):
         get_hotels(call.message)
     elif call.data == 'home_page':
         my_bot.delete_message(chat_id, call.message.message_id)
-        user.page_num = 1
+        user.page_num = 0
         get_hotels(call.message)
 
 

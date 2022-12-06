@@ -1,5 +1,6 @@
 from telebot import types
 
+from Bot_Commands.help import user_help
 from Files_For_Get_Hotels.get_hotels import get_hotels
 from Bot_Files.my_bot import my_bot
 from Bot_Files.user_class import User
@@ -20,9 +21,14 @@ def amount_photos(message):
     try:
         amount = int(message.text)
         if amount > 5 or amount < 1:
-            raise OverflowError
-    except:
-        msg = my_bot.send_message(chat_id, 'Ошибочно введено количество фотографий, введите число до 5')
+            raise ValueError
+        if message.text == '/help' or message.text == '/start':
+            raise FileNotFoundError
+    except FileNotFoundError:
+        user_help(message)
+    except ValueError:
+        my_bot.send_message(chat_id, 'Ошибочно введено количество фотографий, введите число до 5')
+        msg = my_bot.send_message(chat_id, 'Для возврата к началу /help')
         my_bot.register_next_step_handler(msg, amount_photos)
     else:
         user.amount_photo = int(message.text)

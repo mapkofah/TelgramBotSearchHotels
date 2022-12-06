@@ -1,35 +1,60 @@
 import json
-from typing import List
+import re
+
 import requests
 from Bot_Files.user_class import User
 
 
-def api_request_hotel(message) -> List[dict]:
+def api_request_hotels_id(chat_id) -> None:
     """
-    Функция получения данных с API Hotels.com об отелях
+    Функция получения hotel id с API Hotels.com
     """
-    chat_id = message.chat.id
     user = User.get_user(chat_id)
-    if user.user_command == '/lowprice':
-        sortOrder = 'PRICE'
-    elif user.user_command == '/highprice':
-        sortOrder = 'PRICE_HIGHEST_FIRST'
+    price_range = {}
+    if user.user_command == '/bestdeal':
+        sortOrder = 'DISTANCE'
+        price_range = {"price": {"max": user.price_max, "min": user.price_min}}
     else:
-        sortOrder = 'DISTANCE_FROM_LANDMARK'
+        sortOrder = 'PRICE_LOW_TO_HIGH'
         # Самые дешевые и находятся ближе всего к центру
-    url = "https://hotels4.p.rapidapi.com/properties/list"
+    url = "https://hotels4.p.rapidapi.com/properties/v2/list"
 
-    querystring = {"destinationId": user.city_id, "pageNumber": user.page_num, "pageSize": user.page_size,
-                   "checkIn": user.check_in,
-                   "checkOut": user.check_out, "adults1": "1", "sortOrder": sortOrder, "locale": "en_US",
-                   "currency": "RUB"}
-
+    payload = {
+        "currency": "RUB",
+        "eapid": 1,
+        "locale": "ru_RU",
+        "siteId": 300000001,
+        "destination": {"regionId": "2114"},
+        "checkInDate": {
+            "day": user.day_in,
+            "month": user.month_in,
+            "year": user.year_in
+        },
+        "checkOutDate": {
+            "day": user.day_out,
+            "month": user.month_out,
+            "year": user.year_out
+        },
+        "rooms": [{"adults": 1}],
+        "resultsStartingIndex": user.page_num,
+        "resultsSize": user.page_size,
+        "sort": sortOrder,
+        "filters": price_range
+    }
     headers = {
-        'X-RapidAPI-Key': '9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3',
-        'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3",
+        "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    end = json.loads(response.text)
+    response = requests.request("POST", url, json=payload, headers=headers)
+    data_hotels = json.loads(response.text)
 
-    return end['data']['body']["searchResults"]['results']
+    for hotel in data_hotels['data']['propertySearch']['properties']:
+        user.hotels_dict[hotel['id']] = {}
+        hotel_dict = user.hotels_dict[hotel['id']]
+        hotel_dict['name'] = hotel['name']
+        hotel_dict['distance'] = hotel['destinationInfo']['distanceFromDestination']['value']
+        hotel_dict['price_night'] = round(float(hotel['price']['lead']['amount']) * 62, 2)
+        hotel_dict['total_price'] = (int(''.join(re.findall(r'\d+', (hotel['price']['displayMessages'][1]['lineItems'][0]['value'])))) * 62)
+

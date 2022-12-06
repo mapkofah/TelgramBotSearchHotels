@@ -13,23 +13,22 @@ def output_hotels(message):
     prev_page = types.InlineKeyboardButton('Предыдущая страница', callback_data='prev_page')
     home_page = types.InlineKeyboardButton('Вернуться на первую', callback_data='home_page')
     keyboard.add(next_page)
-    if user.page_num != 1:
+    if user.page_num != 0:
         keyboard.add(prev_page)
         keyboard.add(home_page)
     try:
-        if user.need_to_get_photo:
-            index = 0
-            for value in user.dict_photos.values():
-                my_bot.send_message(chat_id, user.hotels_list[index])
-                index += 1
-                my_bot.send_media_group(chat_id, value)
-        else:
-            for hotel in user.hotels_list:
-                my_bot.send_message(chat_id, hotel)
+        for hotel_id in user.hotels_dict.keys():
+            hotel_dict = user.hotels_dict[hotel_id]
+            output_string = f'Название отеля: {hotel_dict["name"]}\n'\
+                            f'Адрес: {hotel_dict["address"]}\n'\
+                            f'Расстояние от центра: {hotel_dict["distance"]} км\n'\
+                            f'Стоимость за ночь: {hotel_dict["price_night"]} руб\n'\
+                            f'Полная стоимость: {hotel_dict["total_price"]} руб'
+            my_bot.send_message(chat_id, output_string)
+            if hotel_dict.get('photo'):
+                my_bot.send_media_group(chat_id, hotel_dict['photo'])
         my_bot.send_message(chat_id,'Выберите действие', reply_markup=keyboard)
         if message.text == '/help' or message.text == '/start':
             raise FileNotFoundError
     except FileNotFoundError:
         user_help(message)
-
-

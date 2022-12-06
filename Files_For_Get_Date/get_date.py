@@ -14,17 +14,21 @@ def get_year(message) -> None:
     """
     chat_id = message.chat.id
     user = User.get_user(chat_id)
-    if not user.flag_check_in:
+    if not user.year_in:
         my_bot.send_message(chat_id, 'Выберите дату заезда:', reply_markup=types.ReplyKeyboardRemove())
     else:
         my_bot.send_message(chat_id, 'Выберите дату выезда:', reply_markup=types.ReplyKeyboardRemove())
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    years = ['2022', '2023']
-    if user.flag_check_in:
-        index = years.index(user.check_in[0])
+    years = [2022, 2023]
+    if user.year_in:
+        index = years.index(user.year_in)
         if user.flag_last_day_month and user.flag_last_month:
             index += 1
         years = years[index:]
+        amount_days = monthrange(user.year_in, user.month_in)[1]
+        if amount_days - user.day_in >= 27:
+            years = years[:years.index(user.year_in) + 1]
+
     keyboard.add(*[types.InlineKeyboardButton(year) for year in years])
     years = my_bot.send_message(chat_id, 'Выберите год', reply_markup=keyboard)
     my_bot.register_next_step_handler(years, get_month)
@@ -41,8 +45,7 @@ def get_month(message) -> None:
               "Июль", "Август", "Сентябрь",
               "Октябрь", "Ноябрь", "Декабрь"]
     try:
-        if len(user.check_in) == 0 and not user.flag_check_in \
-                or len(user.check_out) == 0 and user.flag_check_in:
+        if not user.year_in or not user.year_out and user.year_in:
             if message.text == '/help' or message.text == '/start':
                 raise FileNotFoundError
             year = int(message.text)
@@ -51,35 +54,42 @@ def get_month(message) -> None:
                 raise ValueError
     except ValueError:
         my_bot.send_message(chat_id, 'Что-то не так с годом.\n '
-                                     'Выберите из предложенных или введите год в диапазоне 2022-2024')
+                                     'Выберите из предложенных или введите год в диапазоне 2022-2023')
         my_bot.send_message(chat_id, 'Для возврата к началу /help')
         get_year(message)
     except FileNotFoundError:
         user_help(message)
     else:
-        if len(user.check_in) == 0 and not user.flag_check_in \
-                or len(user.check_out) == 0 and user.flag_check_in:
-            if not user.flag_check_in:
-                user.check_in = []
-                user.check_in.append(message.text)
+        if not user.year_in or not user.year_out and user.year_in:
+            if not user.year_in:
+                user.year_in = int(message.text)  # Сохраняем год даты въезда
             else:
-                user.check_out = []
-                user.check_out.append(message.text)
-            year = message.text
-        elif user.flag_check_in:
-            year = user.check_out[0]
-        elif not user.flag_check_in:
-            year = user.check_in[0]
-        year_now = str(datetime.datetime.now().year)
+                user.year_out = int(message.text)  # Сохраняем год даты въезда
+
+        if not user.year_out:
+            year = user.year_in
+        else:
+            year = user.year_out
+
+        year_now = datetime.datetime.now().year
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        if year == year_now and not user.flag_check_in:
+        if year == year_now and not user.month_in:
             month_now = datetime.datetime.now().month - 1
             months = months[month_now:]
-        elif user.flag_check_in:
-            index = months.index(user.check_in[1])
+        elif user.month_in and year == year_now:
+            index = user.month_in - 1
             if user.flag_last_day_month:
                 index += 1
             months = months[index:]
+        if user.month_in:
+            amount_days = monthrange(year, user.month_in)[1]
+            if amount_days - user.day_in >= 27:
+                months = months[user.month_in - 1:user.month_in]
+            else:
+                if len(months) != 1:
+                    months = months[:user.month_in % 12 + 1]
+                    user.day_out = 27 - (amount_days - user.day_in)
+
         keyboard.add(*[types.InlineKeyboardButton(month) for month in months])
         months = my_bot.send_message(chat_id, 'Выберите месяц', reply_markup=keyboard)
         my_bot.register_next_step_handler(months, get_day)
@@ -89,11 +99,10 @@ def get_day(message):
     chat_id = message.chat.id
     user = User.get_user(chat_id)
     try:
-        if len(user.check_in) == 1 and not user.flag_check_in \
-                or len(user.check_out) == 1 and user.flag_check_in:
+        if not user.month_in or not user.month_out and user.month_in:
+            if message.text == '/help' or message.text == '/start':
+                raise FileNotFoundError
             datetime.datetime.strptime(message.text, '%B')
-        if message.text == '/help' or message.text == '/start':
-            raise FileNotFoundError
     except ValueError:
         my_bot.send_message(chat_id, 'Проблемы с месяцем, выберите из предложенных.'
                                      ' Либо введите в формате: (Январь, Февраль, Март и т.п.)')
@@ -102,36 +111,36 @@ def get_day(message):
     except FileNotFoundError:
         user_help(message)
     else:
-        if len(user.check_in) == 1 and not user.flag_check_in \
-                or len(user.check_out) == 1 and user.flag_check_in:
-            if not user.flag_check_in:
-                user.check_in.insert(0, message.text)
-            else:
-                user.check_out.insert(0, message.text)
-            if message.text == 'Февраль':
-                year = int(user.check_in[1])
-            else:
+        if not user.month_in or user.year_out and user.month_in:
+            if not user.month_in:
+                user.month_in = int(datetime.datetime.strptime(message.text, '%B').month)
                 if message.text == 'Декабрь':
                     user.flag_last_month = True
-        if user.flag_check_in:
-            year = int(user.check_out[1])
-            user_month = user.check_out[0]
-        elif not user.flag_check_in:
-            year = int(user.check_in[1])
-            user_month = user.check_in[0]
+            else:
+                user.month_out = int(datetime.datetime.strptime(message.text, '%B').month)
+
+        if user.day_in:
+            year = user.year_out
+            user_month = user.month_out
+        elif not user.day_in:
+            year = user.year_in
+            user_month = user.month_in
         month_now = datetime.datetime.now().month
-        num_month = datetime.datetime.strptime(user_month, "%B").month
-        amount_days = monthrange(year, num_month)[1]
+        year_now = datetime.datetime.now().year
+        amount_days = monthrange(year, user_month)[1]
         days_list = list(range(1, amount_days + 1))
         day_now = datetime.datetime.now().day - 1
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-        if not user.flag_check_in:
-            if month_now == num_month:
+        if not user.day_in:
+            if month_now == user_month and user.year_in == year_now:
                 days_list = days_list[day_now:]
-        elif user.flag_check_in and not user.flag_last_day_month:
-            if user.check_in[1] == message.text:
-                index = int(user.check_in[2])
+        elif user.day_in and not user.flag_last_day_month:
+            input_month = int(datetime.datetime.strptime(message.text, '%B').month)
+            if user.month_in == input_month:  # Проверяем если месяц въезда равен введенному месяцу выезда
+                index = user.day_in
                 days_list = days_list[index:]
+        if user.day_out:
+            days_list = days_list[:user.day_out]
         if len(days_list) <= 12:
             keyboard.add(*[types.InlineKeyboardButton(day) for day in days_list])
         else:
@@ -147,21 +156,16 @@ def confirm_date(message):
     chat_id = message.chat.id
     user = User.get_user(chat_id)
     try:
-        if len(user.check_in) == 2 and not user.flag_check_in \
-                or len(user.check_out) == 2 and user.flag_check_in:
+        if not user.day_in or not user.day_out and user.day_in:
+            if message.text == '/help' or message.text == '/start':
+                raise FileNotFoundError
             num_day = int(message.text)
-            if not user.flag_check_in:
-                num_month = datetime.datetime.strptime(user.check_in[0], "%B").month
-                year = int(user.check_in[1])
-                last_day_month = monthrange(year, num_month)[1]
-            elif user.flag_check_in:
-                num_month = datetime.datetime.strptime(user.check_out[0], "%B").month
-                year = int(user.check_out[1])
-                last_day_month = monthrange(year, num_month)[1]
+            if not user.day_in:
+                last_day_month = monthrange(user.year_in, user.month_in)[1]
+            elif user.day_in:
+                last_day_month = monthrange(user.year_out, user.month_out)[1]
             if num_day > last_day_month:
                 raise ValueError
-        if message.text == '/help' or message.text == '/start':
-            raise FileNotFoundError
     except ValueError:
         my_bot.send_message(chat_id,
                             'Какой-то странный день, выберите из предложенных, либо введите верное число',
@@ -171,31 +175,23 @@ def confirm_date(message):
     except FileNotFoundError:
         user_help(message)
     else:
-        if not user.flag_check_in:
+        if not user.day_in:
             num_day = int(message.text)
-            num_month = datetime.datetime.strptime(user.check_in[0], "%B").month
-            year = int(user.check_in[1])
-            last_day_month = monthrange(year, num_month)[1]
-        if last_day_month == num_day:
-            user.flag_last_day_month = True
-        if len(message.text) == 1:
-            if not user.flag_check_in:
-                user.check_in.insert(0, f'0{message.text}')
-            else:
-                user.check_out.insert(0, f'0{message.text}')
+            last_day_month = monthrange(user.year_in, user.month_in)[1]
+            if last_day_month == num_day:
+                user.flag_last_day_month = True
+        if not user.day_in:
+            user.day_in = int(message.text)
         else:
-            if not user.flag_check_in:
-                user.check_in.insert(0, message.text)
-            else:
-                user.check_out.insert(0, message.text)
+            user.day_out = int(message.text)
         keyboard = types.InlineKeyboardMarkup()
         key_yes = types.InlineKeyboardButton(text='Да', callback_data='yes_date')
         key_no = types.InlineKeyboardButton(text='Нет', callback_data='no_date')
         keyboard.add(key_yes, key_no)
-        if not user.flag_check_in:
-            my_bot.send_message(chat_id, f'Дата заезда {"-".join(user.check_in)}?', reply_markup=keyboard)
+        if not user.day_out:
+            my_bot.send_message(chat_id, f'Дата заезда {user.day_in}.{user.month_in}.{user.year_in}?', reply_markup=keyboard)
         else:
-            my_bot.send_message(chat_id, f'Дата выезда {"-".join(user.check_out)}?', reply_markup=keyboard)
+            my_bot.send_message(chat_id, f'Дата выезда {user.day_out}.{user.month_out}.{user.year_out}?', reply_markup=keyboard)
 
 
 locale.setlocale(

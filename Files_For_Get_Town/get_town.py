@@ -14,8 +14,8 @@ def get_town(message):
 
 def get_towns_in_api(message):
     name_city = message.text
-    user = User.get_user(message.chat.id)
     chat_id = message.chat.id
+    user = User.get_user(message.chat.id)
     towns_list = api_request_towns(name_city)
     keyboard = types.InlineKeyboardMarkup()
     flag = True

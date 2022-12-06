@@ -9,20 +9,22 @@ class User:
         self.city = None
         self.city_gaiaId = None
         self.city_id = None
-        self.page_num = 1
+        self.page_num = 0
         self.page_size = None
         self.user_command = None
-        self.check_in = []
-        self.check_out = []
-        self.flag_check_in = False
+        self.year_in = None
+        self.month_in = None
+        self.day_in = None
+        self.year_out = None
+        self.month_out = None
+        self.day_out = None
         self.flag_last_day_month = False
         self.flag_last_month = False
-        self.sort_type = None
-        self.hotels_list = []
+        self.hotels_dict = {}
         self.need_to_get_photo = False
-        self.dict_photos = {}
         self.amount_photo = None
-        self.price_range = None
+        self.price_min = None
+        self.price_max = None
         self.distance_range = None
         User.add_user(user_id, self)
 
