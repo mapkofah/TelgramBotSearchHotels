@@ -5,15 +5,15 @@ import requests
 from Bot_Files.user_class import User
 
 
-def api_request_hotels_id(chat_id) -> None:
+def api_request_hotels(chat_id) -> None:
     """
-    Функция получения hotel id с API Hotels.com
+    Функция получения отелей и их данных с API Hotels.com
     """
     user = User.get_user(chat_id)
     price_range = {}
     if user.user_command == '/bestdeal':
         sortOrder = 'DISTANCE'
-        price_range = {"price": {"max": user.price_max, "min": user.price_min}}
+        price_range = {"price": {"max": user.price_range, "min": 1}}
     else:
         sortOrder = 'PRICE_LOW_TO_HIGH'
 
@@ -54,7 +54,10 @@ def api_request_hotels_id(chat_id) -> None:
         user.hotels_dict[hotel['id']] = {}
         hotel_dict = user.hotels_dict[hotel['id']]
         hotel_dict['name'] = hotel['name']
-        hotel_dict['distance'] = hotel['destinationInfo']['distanceFromDestination']['value']
+        hotel_dict['distance'] = float(hotel['destinationInfo']['distanceFromDestination']['value'])
+        if user.user_command == '/bestdeal' and hotel_dict['distance'] > user.distance_range:
+            user.hotels_dict.pop(hotel['id'])
+            break
         hotel_dict['price_night'] = round(float(hotel['price']['lead']['amount']) * 62, 2)
         hotel_dict['total_price'] = (int(''.join(re.findall(r'\d+', (hotel['price']['displayMessages'][1]['lineItems'][0]['value'])))) * 62)
 

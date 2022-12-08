@@ -1,6 +1,7 @@
 from telebot import types
 import locale
 
+from Bot_Commands.help import user_help
 from Files_For_Get_Date.get_date import get_year
 from Files_For_Get_Hotels.get_hotels import get_hotels
 from Bot_Files.my_bot import my_bot
@@ -64,6 +65,10 @@ def callback_data(call):
         my_bot.delete_message(chat_id, call.message.message_id)
         user.page_num = 0
         get_hotels(call.message)
+    elif call.data == 'yes_range':
+        price_range(call.message)
+    elif call.data == 'no_range':
+        user_help(call.message)
 
 
 locale.setlocale(

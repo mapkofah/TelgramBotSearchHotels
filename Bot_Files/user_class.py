@@ -22,10 +22,9 @@ class User:
         self.hotels_dict = {}
         self.need_to_get_photo = False
         self.amount_photo = None
-        self.price_min = None
-        self.price_max = None
-        self.distance_min = None
-        self.distance_max = None
+        self.price_range = None
+        self.distance_range = None
+        self.flag_distance = False
         User.add_user(user_id, self)
 
     @staticmethod

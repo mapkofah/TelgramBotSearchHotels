@@ -6,19 +6,7 @@ from Files_For_Get_Range.get_distance_range import distance_range
 
 def price_range(message) -> None:
     chat_id = message.chat.id
-    msg = my_bot.send_message(chat_id, 'Введите диапазон цен')
-    price_min(msg)
-
-
-def price_min(message) -> None:
-    chat_id = message.chat.id
-    msg = my_bot.send_message(chat_id, 'Введите минимальную цену')
-    my_bot.register_next_step_handler(msg, check_price)
-
-
-def price_max(message) -> None:
-    chat_id = message.chat.id
-    msg = my_bot.send_message(chat_id, 'Введите максимальную цену')
+    msg = my_bot.send_message(chat_id, 'Введите максимальную цену:')
     my_bot.register_next_step_handler(msg, check_price)
 
 
@@ -33,14 +21,7 @@ def check_price(message) -> None:
         user_help(message)
     except ValueError:
         msg = my_bot.send_message(chat_id, 'Неверный ввод, вводите цену цифрами')
-        if not user.price_min:
-            price_min(msg)
-        else:
-            price_max(msg)
+        price_range(message)
     else:
-        if not user.price_min:
-            user.price_min = message.text
-            price_max(message)
-        else:
-            user.price_max = message.text
-            distance_range(message)
+        user.price_range = int(message.text) / 62
+        distance_range(message)
