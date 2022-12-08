@@ -23,7 +23,7 @@ def callback_data(call):
         my_bot.register_next_step_handler(call.message, get_towns_in_api)
     elif user.user_command != '/history' and not user.city:
         user.city = call.data
-        user.city_Id = user.towns_dict.get(call.data)
+        user.city_id = user.towns_dict.get(call.data)
         my_bot.delete_message(chat_id, call.message.message_id)
         get_year(call.message)
     elif call.data == 'yes_date':

@@ -7,7 +7,6 @@ class User:
 
     def __init__(self, user_id: int):
         self.city = None
-        self.city_gaiaId = None
         self.city_id = None
         self.page_num = 0
         self.page_size = None

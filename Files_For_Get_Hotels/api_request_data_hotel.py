@@ -19,9 +19,9 @@ def api_request_data_hotel(chat_id) -> str:
             "propertyId": hotel_id
         }
         headers = {
-            "content-type": "application/json",
-            "X-RapidAPI-Key": "9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3",
-            "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
+            'content-type': 'application/json',
+            'X-RapidAPI-Key': '1796f32a87msh6ff0e54218bd17cp132c92jsnec17a594ba8d',
+            'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
         }
 
         response = requests.request("POST", url, json=payload, headers=headers)

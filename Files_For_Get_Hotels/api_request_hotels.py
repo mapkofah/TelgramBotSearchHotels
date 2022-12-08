@@ -16,7 +16,7 @@ def api_request_hotels_id(chat_id) -> None:
         price_range = {"price": {"max": user.price_max, "min": user.price_min}}
     else:
         sortOrder = 'PRICE_LOW_TO_HIGH'
-        # Самые дешевые и находятся ближе всего к центру
+
     url = "https://hotels4.p.rapidapi.com/properties/v2/list"
 
     payload = {
@@ -24,7 +24,7 @@ def api_request_hotels_id(chat_id) -> None:
         "eapid": 1,
         "locale": "ru_RU",
         "siteId": 300000001,
-        "destination": {"regionId": "2114"},
+        "destination": {"regionId": user.city_id},
         "checkInDate": {
             "day": user.day_in,
             "month": user.month_in,
@@ -43,7 +43,7 @@ def api_request_hotels_id(chat_id) -> None:
     }
     headers = {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "9394540643mshe2529c27c22b9a8p114570jsna1c6d35226f3",
+        "X-RapidAPI-Key": "1796f32a87msh6ff0e54218bd17cp132c92jsnec17a594ba8d",
         "X-RapidAPI-Host": "hotels4.p.rapidapi.com"
     }
 
