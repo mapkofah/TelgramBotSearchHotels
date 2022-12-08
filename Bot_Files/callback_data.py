@@ -6,6 +6,7 @@ from Files_For_Get_Hotels.get_hotels import get_hotels
 from Bot_Files.my_bot import my_bot
 from Files_For_Get_Photos.need_photos import amount_photos
 from Bot_Files.user_class import User
+from Files_For_Get_Range.get_price_range import price_range
 from Files_For_Get_Town.get_town import get_towns_in_api
 from Files_For_Get_Hotels.amount_hotels_page import amount_hotels_page
 
@@ -33,7 +34,10 @@ def callback_data(call):
         else:
             my_bot.delete_message(chat_id, call.message.message_id)
             my_bot.send_message(chat_id, f'Въезд {user.day_in}.{user.month_in}.{user.year_in} \nВыезд {user.day_out}.{user.month_out}.{user.year_out}', reply_markup=types.ReplyKeyboardRemove())
-            amount_hotels_page(call.message)
+            if user.user_command == '/bestdeal':
+                price_range(call.message)
+            else:
+                amount_hotels_page(call.message)
     elif call.data == 'no_date':
         my_bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
                                  text="Введите дату еще раз: ")

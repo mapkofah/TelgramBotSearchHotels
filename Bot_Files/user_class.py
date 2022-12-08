@@ -24,7 +24,8 @@ class User:
         self.amount_photo = None
         self.price_min = None
         self.price_max = None
-        self.distance_range = None
+        self.distance_min = None
+        self.distance_max = None
         User.add_user(user_id, self)
 
     @staticmethod
