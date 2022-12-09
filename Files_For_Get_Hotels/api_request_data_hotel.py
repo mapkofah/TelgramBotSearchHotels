@@ -29,10 +29,18 @@ def api_request_data_hotel(chat_id) -> str:
         hotel_dict = user.hotels_dict[hotel_id]
 
         hotel_dict['address'] = data_hotel['data']['propertyInfo']['summary']['location']['address']['addressLine']
+        hotel_dict['output_string'] = f'Название отеля: {hotel_dict["name"]}\n' \
+                                      f'Адрес: {hotel_dict["address"]}\n' \
+                                      f'Расстояние от центра: {hotel_dict["distance"]} км\n' \
+                                      f'Стоимость за ночь: {hotel_dict["price_night"]} руб\n' \
+                                      f'Полная стоимость: {hotel_dict["total_price"]} руб'
         if user.need_to_get_photo:
             hotel_dict['photo'] = []
             index = 0
             while index != user.amount_photo:
                 url_image = data_hotel['data']['propertyInfo']['propertyGallery']['images'][index]['image']['url']
-                hotel_dict['photo'].append(types.InputMediaPhoto(url_image))
+                if index == 0:
+                    hotel_dict['photo'].append(types.InputMediaPhoto(url_image, caption=hotel_dict['output_string']))
+                else:
+                    hotel_dict['photo'].append(types.InputMediaPhoto(url_image))
                 index += 1
