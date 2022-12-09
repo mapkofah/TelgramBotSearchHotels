@@ -11,6 +11,7 @@ class User:
         self.page_num = 0
         self.page_size = None
         self.user_command = None
+        self.date_message = None
         self.year_in = None
         self.month_in = None
         self.day_in = None
@@ -20,6 +21,7 @@ class User:
         self.flag_last_day_month = False
         self.flag_last_month = False
         self.hotels_dict = {}
+        self.hotels_names = []
         self.need_to_get_photo = False
         self.amount_photo = None
         self.price_range = None

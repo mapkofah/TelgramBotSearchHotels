@@ -54,6 +54,7 @@ def api_request_hotels(chat_id) -> None:
         user.hotels_dict[hotel['id']] = {}
         hotel_dict = user.hotels_dict[hotel['id']]
         hotel_dict['name'] = hotel['name']
+        user.hotels_names.append(hotel['name'])
         hotel_dict['distance'] = float(hotel['destinationInfo']['distanceFromDestination']['value'])
         if user.user_command == '/bestdeal' and hotel_dict['distance'] > user.distance_range:
             user.hotels_dict.pop(hotel['id'])
