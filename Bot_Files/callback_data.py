@@ -13,7 +13,7 @@ from Files_For_Get_Hotels.amount_hotels_page import amount_hotels_page
 
 
 @my_bot.callback_query_handler(func=lambda call: True)
-def callback_data(call):
+def callback_data(call) -> None:
     """
     Обработка сообщения с Inline кнопки
     :param call: данные с кнопки

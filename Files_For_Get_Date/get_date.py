@@ -95,7 +95,7 @@ def get_month(message) -> None:
         my_bot.register_next_step_handler(months, get_day)
 
 
-def get_day(message):
+def get_day(message) -> None:
     chat_id = message.chat.id
     user = User.get_user(chat_id)
     try:
@@ -152,7 +152,7 @@ def get_day(message):
         my_bot.register_next_step_handler(days, confirm_date)
 
 
-def confirm_date(message):
+def confirm_date(message) -> None:
     chat_id = message.chat.id
     user = User.get_user(chat_id)
     try:

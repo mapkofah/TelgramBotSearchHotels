@@ -1,7 +1,6 @@
 from Bot_Commands.best_deal import func_best_deal
 from Bot_Commands.history import func_history
 from Bot_Commands.low_price import func_low_price
-from Bot_Files.user_class import User
 from Bot_Files.my_bot import my_bot
 from Bot_Commands.help import user_help
 from Bot_Commands.high_price import func_high_price

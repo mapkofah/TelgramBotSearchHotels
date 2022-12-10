@@ -3,6 +3,7 @@ import re
 
 import requests
 from Bot_Files.user_class import User
+from History_database.enter_data import enter_hotels_names
 
 
 def api_request_hotels(chat_id) -> None:
@@ -49,6 +50,7 @@ def api_request_hotels(chat_id) -> None:
 
     response = requests.request("POST", url, json=payload, headers=headers)
     data_hotels = json.loads(response.text)
+    user.hotels_names.clear()
 
     for hotel in data_hotels['data']['propertySearch']['properties']:
         user.hotels_dict[hotel['id']] = {}
@@ -61,4 +63,6 @@ def api_request_hotels(chat_id) -> None:
             break
         hotel_dict['price_night'] = round(float(hotel['price']['lead']['amount']) * 62, 2)
         hotel_dict['total_price'] = (int(''.join(re.findall(r'\d+', (hotel['price']['displayMessages'][1]['lineItems'][0]['value'])))) * 62)
+    enter_hotels_names(chat_id)
+
 

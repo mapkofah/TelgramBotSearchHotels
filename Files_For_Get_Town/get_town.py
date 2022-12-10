@@ -4,6 +4,7 @@ from telebot import types
 from Bot_Files.my_bot import my_bot
 from Bot_Files.user_class import User
 from Files_For_Get_Town.api_request_towns import api_request_towns
+from History_database.enter_data import enter_first_data
 
 
 def get_town(message) -> None:
@@ -12,6 +13,7 @@ def get_town(message) -> None:
     user.user_command = message.text
     tconv = lambda x: time.strftime("%H:%M:%S %d.%m.%Y", time.localtime(x))  # Конвертация даты в читабельный вид
     user.date_message = tconv(message.date)  # Время ввода команды
+    enter_first_data(chat_id)
     my_bot.send_message(chat_id, 'Введите название города: ')
     my_bot.register_next_step_handler(message, get_towns_in_api)
 

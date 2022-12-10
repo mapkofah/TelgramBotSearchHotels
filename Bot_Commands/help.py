@@ -2,7 +2,7 @@ from Bot_Files.my_bot import my_bot
 from Bot_Files.user_class import User
 
 
-def user_help(message):
+def user_help(message) -> None:
     chat_id = message.chat.id
     User.del_user(chat_id)
     User.get_user(chat_id)

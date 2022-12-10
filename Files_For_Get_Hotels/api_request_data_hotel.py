@@ -6,7 +6,7 @@ from telebot import types
 from Bot_Files.user_class import User
 
 
-def api_request_data_hotel(chat_id) -> str:
+def api_request_data_hotel(chat_id) -> None:
     user = User.get_user(chat_id)
     for hotel_id in user.hotels_dict.keys():
         url = "https://hotels4.p.rapidapi.com/properties/v2/detail"
