@@ -23,6 +23,7 @@ class User:
         self.month_out = None
         self.need_to_get_photo = False
         self.page_num = 0
+        self.list_page_nums = []
         self.price_range = None
         self.page_size = None
         self.user_command = None

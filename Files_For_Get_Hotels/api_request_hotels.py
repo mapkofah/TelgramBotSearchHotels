@@ -62,7 +62,9 @@ def api_request_hotels(chat_id) -> None:
             user.hotels_dict.pop(hotel['id'])
             break
         hotel_dict['price_night'] = round(float(hotel['price']['lead']['amount']) * 62, 2)
-        hotel_dict['total_price'] = (int(''.join(re.findall(r'\d+', (hotel['price']['displayMessages'][1]['lineItems'][0]['value'])))) * 62)
-    enter_hotels_names(chat_id)
+        hotel_dict['total_price'] = (int(''.join(
+            re.findall(r'\d+', (hotel['price']['displayMessages'][1]['lineItems'][0]['value'])))) * 62)
 
-
+    if not user.page_num in user.list_page_nums:
+        user.list_page_nums.append(user.page_num)
+        enter_hotels_names(chat_id)
