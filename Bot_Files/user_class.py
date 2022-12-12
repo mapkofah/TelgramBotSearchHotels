@@ -9,6 +9,7 @@ class User:
         self.amount_photo = None
         self.city = None
         self.city_id = None
+        self.data_id = 1
         self.date_message = None
         self.day_in = None
         self.day_out = None
@@ -18,7 +19,6 @@ class User:
         self.flag_last_month = False
         self.hotels_dict = {}
         self.hotels_names = []
-        self.data_id = 1
         self.month_in = None
         self.month_out = None
         self.need_to_get_photo = False
