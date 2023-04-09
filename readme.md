@@ -23,7 +23,7 @@ python main.py
 ## Вызов меню
 
 ```
-'/help
+'/help'
 ```
 
 ## Выбор команды loprice, bestdeal
