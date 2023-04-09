@@ -19,7 +19,7 @@ def get_year(message) -> None:
     else:
         my_bot.send_message(chat_id, 'Выберите дату выезда:', reply_markup=types.ReplyKeyboardRemove())
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    years = [2022, 2023]
+    years = [2023, 2024]
     if user.year_in:
         index = years.index(user.year_in)
         if user.flag_last_day_month and user.flag_last_month:
@@ -40,10 +40,10 @@ def get_month(message) -> None:
     """
     chat_id = message.chat.id
     user = User.get_user(chat_id)
-    months = ["Январь", "Февраль", "Март",
-              "Апрель", "Май", "Июнь",
-              "Июль", "Август", "Сентябрь",
-              "Октябрь", "Ноябрь", "Декабрь"]
+    months = ["Января", "Февраля", "Марта",
+              "Апреля", "Мая", "Июня",
+              "Июля", "Августа", "Сентября",
+              "Октября", "Ноября", "Декабря"]
     try:
         if not user.year_in or not user.year_out and user.year_in:
             if message.text == '/help' or message.text == '/start':
@@ -105,7 +105,7 @@ def get_day(message) -> None:
             datetime.datetime.strptime(message.text, '%B')
     except ValueError:
         my_bot.send_message(chat_id, 'Проблемы с месяцем, выберите из предложенных.'
-                                     ' Либо введите в формате: (Январь, Февраль, Март и т.п.)')
+                                     ' Либо введите в формате: (Января, Февраля, Марта и т.п.)')
         my_bot.send_message(chat_id, 'Для возврата к началу /help')
         get_month(message)
     except FileNotFoundError:
@@ -196,5 +196,5 @@ def confirm_date(message) -> None:
 
 locale.setlocale(
     category=locale.LC_ALL,
-    locale="Russian"
+    locale="ru_RU.UTF-8"
 )
