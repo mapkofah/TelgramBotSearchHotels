@@ -3,7 +3,7 @@
 # С историей поиска
 ## Установка
 
-``````
+```
 pip install -r requirements.txt
 ```
 
