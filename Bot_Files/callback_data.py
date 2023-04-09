@@ -73,5 +73,5 @@ def callback_data(call) -> None:
 
 locale.setlocale(
     category=locale.LC_ALL,
-    locale="Russian"
+    locale="ru_RU.UTF-8"
 )
